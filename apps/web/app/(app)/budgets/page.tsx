@@ -12,7 +12,7 @@ export default async function BudgetsPage() {
     const session = await getServerSession(authOptions)
     if (!session?.user?.email) redirect("/login")
 
-    const user = await prisma.user.findUnique({ 
+    const user = await prisma.user.findUnique({
         where: { email: session.user.email },
         include: { budgets: true, transactions: true }
     })
@@ -64,7 +64,6 @@ export default async function BudgetsPage() {
                         const isOver = currentSpent > budget.amount
 
                         return (
-                        return (
                             <Card key={budget.id} className="bg-white border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group">
                                 <CardHeader className="pb-2 border-b border-slate-50 mb-2">
                                     <div className="flex items-center justify-between">
@@ -95,16 +94,16 @@ export default async function BudgetsPage() {
                                                 <p className="text-sm font-bold text-slate-500 tabular-nums">{formatCurrency(budget.amount)}</p>
                                             </div>
                                         </div>
-                                        
+
                                         <div className="relative h-2.5 w-full bg-slate-100 rounded-full overflow-hidden shadow-inner">
-                                            <div 
-                                                className={cn("absolute inset-y-0 left-0 rounded-full transition-all duration-1000", isOver ? "bg-orange-600 shadow-[0_0_10px_rgba(234,88,12,0.3)]" : "bg-emerald-600 shadow-[0_0_10px_rgba(16,185,129,0.3)]")} 
-                                                style={{ width: `${progress}%` }} 
+                                            <div
+                                                className={cn("absolute inset-y-0 left-0 rounded-full transition-all duration-1000", isOver ? "bg-orange-600 shadow-[0_0_10px_rgba(234,88,12,0.3)]" : "bg-emerald-600 shadow-[0_0_10px_rgba(16,185,129,0.3)]")}
+                                                style={{ width: `${progress}%` }}
                                             />
                                         </div>
                                         <p className="text-[10px] text-slate-400 font-medium leading-relaxed">
-                                            {isOver 
-                                                ? `Reduce your ${budget.category} spending to stay on track this month.` 
+                                            {isOver
+                                                ? `Reduce your ${budget.category} spending to stay on track this month.`
                                                 : `You're doing great! Keep your daily spending under ${formatCurrency((budget.amount - currentSpent) / 15)}.`
                                             }
                                         </p>

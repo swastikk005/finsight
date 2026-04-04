@@ -73,7 +73,7 @@ export default async function Dashboard() {
       </div>
 
       {/* Diagnostics: Burn Rate & Safe Spend */}
-      <DiagnosticsPanel 
+      <DiagnosticsPanel
         safeDailySpend={stats.safeDailySpend}
         daysUntilBurnout={stats.daysUntilBurnout}
         spikes={stats.spikes}
@@ -101,7 +101,7 @@ export default async function Dashboard() {
 
       {/* Recent Transactions */}
       <RecentTransactions
-        transactions={stats.recentTransactions.map((t) => ({
+        transactions={stats.recentTransactions.map((t: any) => ({
           ...t,
           date: t.date.toISOString(),
         }))}

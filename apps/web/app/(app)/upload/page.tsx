@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Upload, FileText, CheckCircle2, AlertCircle, Loader2, Sparkles, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
+import { Progress } from "@/components/ui/Progress"
 
 export default function UploadPage() {
     const [file, setFile] = useState<File | null>(null)
@@ -18,7 +18,7 @@ export default function UploadPage() {
 
         setStatus("uploading")
         setProgress(10)
-        
+
         const form = new FormData()
         form.append("file", file)
 
@@ -44,7 +44,7 @@ export default function UploadPage() {
                 setStatus("error")
                 setMessage(json.error || "Upload failed. Please check the CSV format.")
             }
-        } catch (error) {
+        } catch (_error) {
             setStatus("error")
             setMessage("An unexpected error occurred during import.")
         }
@@ -64,7 +64,7 @@ export default function UploadPage() {
                 <CardContent className="p-0 flex flex-col items-center justify-center text-center space-y-6">
                     <AnimatePresence mode="wait">
                         {status === "idle" && (
-                            <motion.div 
+                            <motion.div
                                 key="idle"
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -74,15 +74,15 @@ export default function UploadPage() {
                                 <div className="h-24 w-24 rounded-3xl bg-emerald-50 border border-emerald-100 flex items-center justify-center mx-auto group shadow-sm">
                                     <Upload className="h-12 w-12 text-emerald-600 group-hover:scale-110 transition-transform" />
                                 </div>
-                                
+
                                 <div className="space-y-1">
                                     <p className="text-xl font-black text-slate-900">Click to upload or drag & drop</p>
                                     <p className="text-xs text-slate-400 font-medium italic">Supports .csv (Date, Description, Amount)</p>
                                 </div>
 
-                                <input 
-                                    type="file" 
-                                    accept=".csv" 
+                                <input
+                                    type="file"
+                                    accept=".csv"
                                     onChange={(e) => setFile(e.target.files?.[0] || null)}
                                     className="absolute inset-0 opacity-0 cursor-pointer"
                                 />
@@ -94,7 +94,7 @@ export default function UploadPage() {
                                     </div>
                                 )}
 
-                                <Button 
+                                <Button
                                     onClick={handleUpload}
                                     disabled={!file}
                                     className="w-full max-w-xs bg-emerald-600 hover:bg-emerald-700 text-white font-black h-14 rounded-2xl shadow-xl shadow-emerald-100 text-lg active:scale-[0.98] transition-all"
@@ -105,7 +105,7 @@ export default function UploadPage() {
                         )}
 
                         {status === "uploading" && (
-                            <motion.div 
+                            <motion.div
                                 key="uploading"
                                 className="space-y-6 w-full py-10"
                             >
@@ -124,7 +124,7 @@ export default function UploadPage() {
                         )}
 
                         {status === "success" && (
-                            <motion.div 
+                            <motion.div
                                 key="success"
                                 className="space-y-6 w-full py-10"
                             >
@@ -135,7 +135,7 @@ export default function UploadPage() {
                                     <h3 className="text-2xl font-black text-slate-900">Import Complete!</h3>
                                     <p className="text-sm font-medium text-slate-500 max-w-xs mx-auto italic">{message}</p>
                                 </div>
-                                <Button 
+                                <Button
                                     onClick={() => window.location.href = "/dashboard"}
                                     className="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-8 py-6 rounded-2xl shadow-xl shadow-emerald-100"
                                 >
@@ -145,7 +145,7 @@ export default function UploadPage() {
                         )}
 
                         {status === "error" && (
-                            <motion.div 
+                            <motion.div
                                 key="error"
                                 className="space-y-6 w-full py-10"
                             >
@@ -156,7 +156,7 @@ export default function UploadPage() {
                                     <h3 className="text-2xl font-black text-slate-900">Import Failed</h3>
                                     <p className="text-sm font-medium text-red-600/70 max-w-xs mx-auto italic">{message}</p>
                                 </div>
-                                <Button 
+                                <Button
                                     variant="outline"
                                     onClick={() => setStatus("idle")}
                                     className="border-slate-200 hover:bg-slate-50 font-black px-8"
