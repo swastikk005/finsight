@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Upload, FileText, CheckCircle2, AlertCircle, Loader2, Sparkles, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Progress } from "@/components/ui/Progress"
+import { Progress } from "@/components/ui/progress"
 
 export default function UploadPage() {
     const [file, setFile] = useState<File | null>(null)
